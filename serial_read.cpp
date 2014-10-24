@@ -1,4 +1,8 @@
 #include "serial_read.h"
+#include <stdio.h>
+UART *pUart=0; //The UART starts out as 0.
+
+/*Open the serial device for later reading*/
 int SerialInit()
 {
  int file;
@@ -22,6 +26,9 @@ int SerialInit()
 //For more information on the UART struct, look at defines.h
 int ReadSerial(char port)
 {
+ int testy=1;
+ if(pUart == 0) testy = SerialInit();
+ if(testy==0) return 0;
  unsigned char LSB = (unsigned char)(pUart->Raw[(port-1)][pUart->Actual[(port-1)]][0]); //The 8 Least-Significant bits of our return value are stored here.
  unsigned char MSB = (unsigned char)(pUart->Raw[(port-1)][pUart->Actual[(port-1)]][1]) & 0x7; //The three most-significant bytes of the return value are the 3 LSB of the next byte of memory.
  short rtn = MSB << 8; //Assuming short is 16 bit, rtn = 0000 0MMM 0000 0000 where MMM are the values in MSB
