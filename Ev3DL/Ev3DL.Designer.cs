@@ -38,6 +38,11 @@
             this.btnConnect = new System.Windows.Forms.Button();
             this.labelConnectionStatus = new System.Windows.Forms.Label();
             this.btnRename = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.tbFile = new System.Windows.Forms.TextBox();
+            this.labelUpload = new System.Windows.Forms.Label();
+            this.btnSendFile = new System.Windows.Forms.Button();
+            this.btnBrowse = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -130,11 +135,56 @@
             this.btnRename.Text = "Rename";
             this.btnRename.UseVisualStyleBackColor = true;
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
+            // tbFile
+            // 
+            this.tbFile.Location = new System.Drawing.Point(110, 165);
+            this.tbFile.Name = "tbFile";
+            this.tbFile.Size = new System.Drawing.Size(234, 22);
+            this.tbFile.TabIndex = 6;
+            // 
+            // labelUpload
+            // 
+            this.labelUpload.AutoSize = true;
+            this.labelUpload.Location = new System.Drawing.Point(15, 145);
+            this.labelUpload.Name = "labelUpload";
+            this.labelUpload.Size = new System.Drawing.Size(97, 17);
+            this.labelUpload.TabIndex = 7;
+            this.labelUpload.Text = "File to upload:";
+            // 
+            // btnSendFile
+            // 
+            this.btnSendFile.Location = new System.Drawing.Point(18, 194);
+            this.btnSendFile.Name = "btnSendFile";
+            this.btnSendFile.Size = new System.Drawing.Size(75, 23);
+            this.btnSendFile.TabIndex = 8;
+            this.btnSendFile.Text = "Send";
+            this.btnSendFile.UseVisualStyleBackColor = true;
+            this.btnSendFile.Click += new System.EventHandler(this.btnSendFile_Click);
+            // 
+            // btnBrowse
+            // 
+            this.btnBrowse.Location = new System.Drawing.Point(18, 165);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowse.TabIndex = 9;
+            this.btnBrowse.Text = "Browse...";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            // 
             // Ev3DL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(364, 255);
+            this.Controls.Add(this.btnBrowse);
+            this.Controls.Add(this.btnSendFile);
+            this.Controls.Add(this.labelUpload);
+            this.Controls.Add(this.tbFile);
             this.Controls.Add(this.btnRename);
             this.Controls.Add(this.labelConnectionStatus);
             this.Controls.Add(this.btnConnect);
@@ -162,6 +212,11 @@
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.Label labelConnectionStatus;
         private System.Windows.Forms.Button btnRename;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TextBox tbFile;
+        private System.Windows.Forms.Label labelUpload;
+        private System.Windows.Forms.Button btnSendFile;
+        private System.Windows.Forms.Button btnBrowse;
     }
 }
 
