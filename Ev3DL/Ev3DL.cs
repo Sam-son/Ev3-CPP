@@ -27,6 +27,7 @@ namespace Ev3DL
             tbFile.Visible = false;
             btnSendFile.Visible = false;
             btnBrowse.Visible = false;
+            btnBuild.Visible = false;
         }
         private void EnableSend()
         {
@@ -34,6 +35,7 @@ namespace Ev3DL
             tbFile.Visible = true;
             btnSendFile.Visible = true;
             btnBrowse.Visible = true;
+            btnBuild.Visible = true;
         }
         private void DisableBT()
         {
@@ -170,6 +172,12 @@ namespace Ev3DL
                 return;
             }
             return;
+        }
+
+        private void btnBuild_Click(object sender, EventArgs e)
+        {
+            var bf = new BuildFrm(tbFile.Text);
+            bf.ShowDialog(this);
         }
     }
 }

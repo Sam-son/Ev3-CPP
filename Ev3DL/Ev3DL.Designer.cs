@@ -43,6 +43,7 @@
             this.labelUpload = new System.Windows.Forms.Label();
             this.btnSendFile = new System.Windows.Forms.Button();
             this.btnBrowse = new System.Windows.Forms.Button();
+            this.btnBuild = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -176,11 +177,22 @@
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
+            // btnBuild
+            // 
+            this.btnBuild.Location = new System.Drawing.Point(234, 194);
+            this.btnBuild.Name = "btnBuild";
+            this.btnBuild.Size = new System.Drawing.Size(109, 23);
+            this.btnBuild.TabIndex = 10;
+            this.btnBuild.Text = "Build Source...";
+            this.btnBuild.UseVisualStyleBackColor = true;
+            this.btnBuild.Click += new System.EventHandler(this.btnBuild_Click);
+            // 
             // Ev3DL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(364, 255);
+            this.Controls.Add(this.btnBuild);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.btnSendFile);
             this.Controls.Add(this.labelUpload);
@@ -217,6 +229,7 @@
         private System.Windows.Forms.Label labelUpload;
         private System.Windows.Forms.Button btnSendFile;
         private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.Button btnBuild;
     }
 }
 
