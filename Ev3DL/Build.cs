@@ -23,30 +23,32 @@ namespace Ev3DL
         }
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            openFileDialog1.ShowDialog(this);
-        }
-        private void openFileDialog1_FileOk(object sender , CancelEventArgs e)
-        {
-            var v = sender as OpenFileDialog;
-            tbFile.Text = v.FileName;
+            DialogResult r = openFileDialog1.ShowDialog(this);
+            if (r == DialogResult.OK)
+                tbFile.Text = openFileDialog1.FileName;
         }
 
         private void btnBuild_Click(object sender, EventArgs e)
         {
+            var substrstart= tbFile.Text.LastIndexOf("\\")+1;
+            var oname = tbFile.Text.Substring(substrstart,tbFile.Text.LastIndexOf(".")-substrstart); 
             System.Diagnostics.Process BuildProcess = new System.Diagnostics.Process();
             BuildProcess.StartInfo.FileName = @"C:\CSLITE\bin\arm-none-linux-gnueabi-g++.exe";
-            BuildProcess.StartInfo.Arguments = "--version";
+            BuildProcess.StartInfo.Arguments = "-o "+oname+".o "+ tbFile.Text;
             BuildProcess.StartInfo.CreateNoWindow = true;
             BuildProcess.StartInfo.UseShellExecute = false;
             BuildProcess.StartInfo.RedirectStandardOutput = true;
+            BuildProcess.StartInfo.RedirectStandardError = true;
             BuildProcess.OutputDataReceived += new System.Diagnostics.DataReceivedEventHandler(BuildOutputHandler);
+            BuildProcess.ErrorDataReceived += new System.Diagnostics.DataReceivedEventHandler(BuildOutputHandler);
             BuildProcess.Start();
             BuildProcess.BeginOutputReadLine();
+            BuildProcess.BeginErrorReadLine();
             BuildProcess.WaitForExit();
         }
         void BuildOutputHandler(object sender, System.Diagnostics.DataReceivedEventArgs e)
         {
-            this.BeginInvoke(new MethodInvoker(() => { tbBuildOutput.AppendText(e.Data ?? string.Empty); }));
+            this.BeginInvoke(new MethodInvoker(() => { tbBuildOutput.AppendText(e.Data ?? string.Empty);}));
         }
     }
 }
