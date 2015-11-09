@@ -28,13 +28,14 @@ namespace Ev3DL
                 tbFile.Text = openFileDialog1.FileName;
         }
 
+        private const string includes = "lms2012\\ev3_button.c lms2012\\ev3_command.c lms2012\\ev3_lcd.c lms2012\\ev3_output.c lms2012\\ev3_sound.c lms2012\\ev3_timer.c ";
         private void btnBuild_Click(object sender, EventArgs e)
         {
             var substrstart= tbFile.Text.LastIndexOf("\\")+1;
             var oname = tbFile.Text.Substring(substrstart,tbFile.Text.LastIndexOf(".")-substrstart); 
             System.Diagnostics.Process BuildProcess = new System.Diagnostics.Process();
             BuildProcess.StartInfo.FileName = @"C:\CSLITE\bin\arm-none-linux-gnueabi-g++.exe";
-            BuildProcess.StartInfo.Arguments = "-o "+oname+".o "+ tbFile.Text;
+            BuildProcess.StartInfo.Arguments = "-o "+oname+".o "+ includes + tbFile.Text;
             BuildProcess.StartInfo.CreateNoWindow = true;
             BuildProcess.StartInfo.UseShellExecute = false;
             BuildProcess.StartInfo.RedirectStandardOutput = true;
