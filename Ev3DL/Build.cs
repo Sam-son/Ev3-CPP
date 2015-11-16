@@ -35,7 +35,7 @@ namespace Ev3DL
             var oname = tbFile.Text.Substring(substrstart,tbFile.Text.LastIndexOf(".")-substrstart); 
             System.Diagnostics.Process BuildProcess = new System.Diagnostics.Process();
             BuildProcess.StartInfo.FileName = @"C:\CSLITE\bin\arm-none-linux-gnueabi-g++.exe";
-            BuildProcess.StartInfo.Arguments = "-o "+oname+".o "+ includes + tbFile.Text;
+            BuildProcess.StartInfo.Arguments = "-static -o "+oname+".out "+ includes + tbFile.Text;
             BuildProcess.StartInfo.CreateNoWindow = true;
             BuildProcess.StartInfo.UseShellExecute = false;
             BuildProcess.StartInfo.RedirectStandardOutput = true;
