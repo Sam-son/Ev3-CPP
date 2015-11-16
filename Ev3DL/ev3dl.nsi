@@ -44,12 +44,21 @@
 Section "Section" Sec
 
   SetOutPath "$INSTDIR"
+;Remove old files
+  Delete "$INSTDIR\Uninstall.exe"
+  Delete "$INSTDIR\Ev3DL.exe"
+  Delete "$INSTDIR\Lego.Ev3.Desktop.dll"
+  Delete "$INSTDIR\Lego.Ev3.Desktop.XML"
+  Delete "$INSTDIR\icon.ico"
+  
   ;ADD YOUR OWN FILES HERE...
+  
   File Ev3DL.exe
   File Lego.Ev3.Desktop.dll
   File Lego.Ev3.Desktop.XML
   File icon.ico
   File /r "lmsapi"
+
   ;Add Start Menu Shortcut
   createDirectory "$SMPROGRAMS\Ev3DL"
   createShortCut "$SMPROGRAMS\Ev3DL\Ev3DL.lnk" "$INSTDIR\Ev3DL.exe" "" "$INSTDIR\icon.ico"
