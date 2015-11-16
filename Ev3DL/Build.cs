@@ -28,14 +28,16 @@ namespace Ev3DL
                 tbFile.Text = openFileDialog1.FileName;
         }
 
-        private const string includes = "lms2012\\ev3_button.c lms2012\\ev3_command.c lms2012\\ev3_lcd.c lms2012\\ev3_output.c lms2012\\ev3_sound.c lms2012\\ev3_timer.c ";
+        //TODO: Make this less stupid.
+        private const string includes = "\"C:\\Program Files (x86)\\Ev3DL\\lmsapi\\ev3_button.c\" \"C:\\Program Files (x86)\\Ev3DL\\lmsapi\\ev3_command.c\" \"C:\\Program Files (x86)\\Ev3DL\\lmsapi\\ev3_lcd.c\" \"C:\\Program Files (x86)\\Ev3DL\\lmsapi\\ev3_output.c\" \"C:\\Program Files (x86)\\Ev3DL\\lmsapi\\ev3_sound.c\" \"C:\\Program Files (x86)\\Ev3DL\\lmsapi\\ev3_timer.c\" ";
         private void btnBuild_Click(object sender, EventArgs e)
         {
             var substrstart= tbFile.Text.LastIndexOf("\\")+1;
             var oname = tbFile.Text.Substring(substrstart,tbFile.Text.LastIndexOf(".")-substrstart); 
             System.Diagnostics.Process BuildProcess = new System.Diagnostics.Process();
-            BuildProcess.StartInfo.FileName = @"C:\CSLITE\bin\arm-none-linux-gnueabi-g++.exe";
-            BuildProcess.StartInfo.Arguments = "-static -o "+oname+".out "+ includes + tbFile.Text;
+            BuildProcess.StartInfo.FileName = @"C:\CSLITE\bin\arm-none-linux-gnueabi-gcc.exe";
+            string docpath = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +"\\";
+            BuildProcess.StartInfo.Arguments = "-I \"C:\\Program Files (x86)\\Ev3DL\\lmsapi\" -static -o "+docpath+oname+".out "+ includes + tbFile.Text;
             BuildProcess.StartInfo.CreateNoWindow = true;
             BuildProcess.StartInfo.UseShellExecute = false;
             BuildProcess.StartInfo.RedirectStandardOutput = true;
@@ -46,10 +48,11 @@ namespace Ev3DL
             BuildProcess.BeginOutputReadLine();
             BuildProcess.BeginErrorReadLine();
             BuildProcess.WaitForExit();
+            tbBuildOutput.AppendText("Done Building.\n");
         }
         void BuildOutputHandler(object sender, System.Diagnostics.DataReceivedEventArgs e)
         {
-            this.BeginInvoke(new MethodInvoker(() => { tbBuildOutput.AppendText(e.Data ?? string.Empty);}));
+            this.BeginInvoke(new MethodInvoker(() => { tbBuildOutput.AppendText((e.Data!= null) ? e.Data + "\n" : string.Empty);}));
         }
     }
 }
