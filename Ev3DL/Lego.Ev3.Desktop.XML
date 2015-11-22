@@ -9,37 +9,6 @@
             Main EV3 brick interface
             </summary>
         </member>
-        <member name="M:Lego.Ev3.Core.Brick.#ctor(Lego.Ev3.Core.ICommunication)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="comm">Object implementing the <see cref="T:Lego.Ev3.Core.ICommunication"/> interface for talking to the brick</param>
-        </member>
-        <member name="M:Lego.Ev3.Core.Brick.#ctor(Lego.Ev3.Core.ICommunication,System.Boolean)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="comm">Object implementing the <see cref="T:Lego.Ev3.Core.ICommunication"/> interface for talking to the brick</param>
-            <param name="alwaysSendEvents">Send events when data changes, or at every poll</param>
-        </member>
-        <member name="M:Lego.Ev3.Core.Brick.ConnectAsync">
-            <summary>
-            Connect to the EV3 brick.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Lego.Ev3.Core.Brick.ConnectAsync(System.TimeSpan)">
-            <summary>
-            Connect to the EV3 brick with a specified polling time.
-            </summary>
-            <param name="pollingTime">The period to poll the device status.  Set to TimeSpan.Zero to disable polling.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Lego.Ev3.Core.Brick.Disconnect">
-            <summary>
-            Disconnect from the EV3 brick
-            </summary>
-        </member>
         <member name="P:Lego.Ev3.Core.Brick.LcdWidth">
             <summary>
             Width of LCD screen
@@ -83,6 +52,37 @@
         <member name="E:Lego.Ev3.Core.Brick.BrickChanged">
             <summary>
             Event that is fired when a port is changed
+            </summary>
+        </member>
+        <member name="M:Lego.Ev3.Core.Brick.#ctor(Lego.Ev3.Core.ICommunication)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="comm">Object implementing the <see cref="T:Lego.Ev3.Core.ICommunication"/> interface for talking to the brick</param>
+        </member>
+        <member name="M:Lego.Ev3.Core.Brick.#ctor(Lego.Ev3.Core.ICommunication,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="comm">Object implementing the <see cref="T:Lego.Ev3.Core.ICommunication"/> interface for talking to the brick</param>
+            <param name="alwaysSendEvents">Send events when data changes, or at every poll</param>
+        </member>
+        <member name="M:Lego.Ev3.Core.Brick.ConnectAsync">
+            <summary>
+            Connect to the EV3 brick.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Lego.Ev3.Core.Brick.ConnectAsync(System.TimeSpan)">
+            <summary>
+            Connect to the EV3 brick with a specified polling time.
+            </summary>
+            <param name="pollingTime">The period to poll the device status.  Set to TimeSpan.Zero to disable polling.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lego.Ev3.Core.Brick.Disconnect">
+            <summary>
+            Disconnect from the EV3 brick
             </summary>
         </member>
         <member name="T:Lego.Ev3.Core.BrickButtons">
@@ -447,6 +447,13 @@
             Append the Update UI command to an existing Command object
             </summary>
         </member>
+        <member name="M:Lego.Ev3.Core.Command.ListFiles(System.Int32,System.Int32)">
+            <summary>
+            Get a list of files on the brick.
+            <param name="bufferSize">Size of the buffer to hold the returned data</param>
+            <param name="index">Index to the position of the returned data in the global buffer</param>
+            </summary>
+        </member>
         <member name="M:Lego.Ev3.Core.Command.DeleteFile(System.String)">
             <summary>
             Append the Delete File command to an existing Command object
@@ -507,6 +514,13 @@
             <param name="mode">The mode of the name to get</param>
             <param name="bufferSize">Size of the buffer to hold the returned data</param>
             <param name="index">Index to the position of the returned data in the global buffer</param>
+        </member>
+        <member name="M:Lego.Ev3.Core.Command.OutputReady(Lego.Ev3.Core.OutputPort)">
+            <summary>
+            Wait for the specificed output port(s) to be ready for the next command
+            </summary>
+            <param name="ports">Port(s) to wait for</param>
+            <returns></returns>
         </member>
         <member name="M:Lego.Ev3.Core.Command.SendCommandAsync">
             <summary>
@@ -628,7 +642,7 @@
             <param name="brake">Apply brake to motor at end of routine.</param>
             <returns></returns>
         </member>
-        <member name="M:Lego.Ev3.Core.DirectCommand.SetMotorPolarity(Lego.Ev3.Core.OutputPort,Lego.Ev3.Core.Polarity)">
+        <member name="M:Lego.Ev3.Core.DirectCommand.SetMotorPolarityAsync(Lego.Ev3.Core.OutputPort,Lego.Ev3.Core.Polarity)">
             <summary>
             Set the polarity (direction) of a motor.
             </summary>
@@ -673,13 +687,13 @@
             <param name="brake">Apply brake to motor at end of routine.</param>
             <returns></returns>
         </member>
-        <member name="M:Lego.Ev3.Core.DirectCommand.ClearAllDevices">
+        <member name="M:Lego.Ev3.Core.DirectCommand.ClearAllDevicesAsync">
             <summary>
             Resets all ports and devices to defaults.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Lego.Ev3.Core.DirectCommand.ClearChanges(Lego.Ev3.Core.InputPort)">
+        <member name="M:Lego.Ev3.Core.DirectCommand.ClearChangesAsync(Lego.Ev3.Core.InputPort)">
             <summary>
             Clears changes on specified port
             </summary>
@@ -890,35 +904,21 @@
             <param name="mode">Mode of the name to get</param>
             <returns>The name of the mode</returns>
         </member>
+        <member name="M:Lego.Ev3.Core.DirectCommand.OutputReadyAsync(Lego.Ev3.Core.OutputPort)">
+            <summary>
+            Wait for the specificed output port(s) to be ready for the next command
+            </summary>
+            <param name="ports">Port(s) to wait for</param>
+            <returns></returns>
+        </member>
         <member name="T:Lego.Ev3.Core.DummyCommunication">
             <summary>
             Dummy object for testing.  Does not actually connect or communicate with EV3 brick.
             </summary>
         </member>
-        <member name="T:Lego.Ev3.Core.ICommunication">
+        <member name="E:Lego.Ev3.Core.DummyCommunication.ReportReceived">
             <summary>
-            Interface for communicating with the EV3 brick
-            </summary>
-        </member>
-        <member name="M:Lego.Ev3.Core.ICommunication.ConnectAsync">
-            <summary>
-            Connect to the EV3 brick.
-            </summary>
-        </member>
-        <member name="M:Lego.Ev3.Core.ICommunication.Disconnect">
-            <summary>
-            Disconnect from the EV3 brick.
-            </summary>
-        </member>
-        <member name="M:Lego.Ev3.Core.ICommunication.WriteAsync(System.Byte[])">
-            <summary>
-            Write a report to the EV3 brick.
-            </summary>
-            <param name="data"></param>
-        </member>
-        <member name="E:Lego.Ev3.Core.ICommunication.ReportReceived">
-            <summary>
-            Fired when a full report is ready to parse and process.
+            Event fired when a complete report is received from the EV3 brick.  In this dummy implementation, the event is never fired.
             </summary>
         </member>
         <member name="M:Lego.Ev3.Core.DummyCommunication.ConnectAsync">
@@ -938,11 +938,6 @@
             </summary>
             <param name="data">Byte array to be written.</param>
             <returns></returns>
-        </member>
-        <member name="E:Lego.Ev3.Core.DummyCommunication.ReportReceived">
-            <summary>
-            Event fired when a complete report is received from the EV3 brick.  In this dummy implementation, the event is never fired.
-            </summary>
         </member>
         <member name="T:Lego.Ev3.Core.CommandType">
             <summary>
@@ -1624,6 +1619,32 @@
             Brown
             </summary>
         </member>
+        <member name="T:Lego.Ev3.Core.ICommunication">
+            <summary>
+            Interface for communicating with the EV3 brick
+            </summary>
+        </member>
+        <member name="E:Lego.Ev3.Core.ICommunication.ReportReceived">
+            <summary>
+            Fired when a full report is ready to parse and process.
+            </summary>
+        </member>
+        <member name="M:Lego.Ev3.Core.ICommunication.ConnectAsync">
+            <summary>
+            Connect to the EV3 brick.
+            </summary>
+        </member>
+        <member name="M:Lego.Ev3.Core.ICommunication.Disconnect">
+            <summary>
+            Disconnect from the EV3 brick.
+            </summary>
+        </member>
+        <member name="M:Lego.Ev3.Core.ICommunication.WriteAsync(System.Byte[])">
+            <summary>
+            Write a report to the EV3 brick.
+            </summary>
+            <param name="data"></param>
+        </member>
         <member name="T:Lego.Ev3.Core.Port">
             <summary>
             An input or output port on the EV3 brick
@@ -1632,6 +1653,36 @@
         <member name="M:Lego.Ev3.Core.Port.#ctor">
             <summary>
             Constructor
+            </summary>
+        </member>
+        <member name="P:Lego.Ev3.Core.Port.Name">
+            <summary>
+            Name of port.
+            </summary>
+        </member>
+        <member name="P:Lego.Ev3.Core.Port.Type">
+            <summary>
+            Device plugged into port.
+            </summary>
+        </member>
+        <member name="P:Lego.Ev3.Core.Port.Mode">
+            <summary>
+            Device mode.  Some devices work in multiple modes.
+            </summary>
+        </member>
+        <member name="P:Lego.Ev3.Core.Port.SIValue">
+            <summary>
+            Current International System of Units value associated with the Port.
+            </summary>
+        </member>
+        <member name="P:Lego.Ev3.Core.Port.RawValue">
+            <summary>
+            Raw value associated with the Port.
+            </summary>
+        </member>
+        <member name="P:Lego.Ev3.Core.Port.PercentValue">
+            <summary>
+            Percentage value associated with the Port.
             </summary>
         </member>
         <member name="M:Lego.Ev3.Core.Port.SetMode(System.Byte)">
@@ -1700,36 +1751,6 @@
             </summary>
             <param name="mode">The requested mode.</param>
         </member>
-        <member name="P:Lego.Ev3.Core.Port.Name">
-            <summary>
-            Name of port.
-            </summary>
-        </member>
-        <member name="P:Lego.Ev3.Core.Port.Type">
-            <summary>
-            Device plugged into port.
-            </summary>
-        </member>
-        <member name="P:Lego.Ev3.Core.Port.Mode">
-            <summary>
-            Device mode.  Some devices work in multiple modes.
-            </summary>
-        </member>
-        <member name="P:Lego.Ev3.Core.Port.SIValue">
-            <summary>
-            Current International System of Units value associated with the Port.
-            </summary>
-        </member>
-        <member name="P:Lego.Ev3.Core.Port.RawValue">
-            <summary>
-            Raw value associated with the Port.
-            </summary>
-        </member>
-        <member name="P:Lego.Ev3.Core.Port.PercentValue">
-            <summary>
-            Percentage value associated with the Port.
-            </summary>
-        </member>
         <member name="E:Lego.Ev3.Core.Port.PropertyChanged">
             <summary>
             INotifyProperty event
@@ -1774,9 +1795,20 @@
             <returns></returns>
             <remarks>devicePath is relative from "lms2012/sys" on the EV3 brick.  The path must start with "apps", "prjs", or "tools".</remarks>
         </member>
+        <member name="M:Lego.Ev3.Core.SystemCommand.ListFiles">
+            <summary>
+            Shows files on Ev3
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Lego.Ev3.Desktop.BluetoothCommunication">
             <summary>
             Communicate to EV3 brick over Bluetooth
+            </summary>
+        </member>
+        <member name="E:Lego.Ev3.Desktop.BluetoothCommunication.ReportReceived">
+            <summary>
+            Event fired when a complete report is received from the EV3 brick.
             </summary>
         </member>
         <member name="M:Lego.Ev3.Desktop.BluetoothCommunication.#ctor(System.String)">
@@ -1803,14 +1835,14 @@
             <param name="data">Byte array of data to send to the EV3 brick.</param>
             <returns></returns>
         </member>
-        <member name="E:Lego.Ev3.Desktop.BluetoothCommunication.ReportReceived">
-            <summary>
-            Event fired when a complete report is received from the EV3 brick.
-            </summary>
-        </member>
         <member name="T:Lego.Ev3.Desktop.UsbCommunication">
             <summary>
             Communicate with EV3 brick over USB HID.
+            </summary>
+        </member>
+        <member name="E:Lego.Ev3.Desktop.UsbCommunication.ReportReceived">
+            <summary>
+            Event fired when a complete report is received from the EV3 brick.
             </summary>
         </member>
         <member name="M:Lego.Ev3.Desktop.UsbCommunication.ConnectAsync">
@@ -1831,11 +1863,6 @@
             <param name="data">Byte array to send to the EV3 brick.</param>
             <returns></returns>
         </member>
-        <member name="E:Lego.Ev3.Desktop.UsbCommunication.ReportReceived">
-            <summary>
-            Event fired when a complete report is received from the EV3 brick.
-            </summary>
-        </member>
         <member name="T:Lego.Ev3.Desktop.HidImports">
             <summary>
             Win32 import information for use with the Wiimote library
@@ -1844,6 +1871,11 @@
         <member name="T:Lego.Ev3.Desktop.NetworkCommunication">
             <summary>
             Communicate with EV3 brick over TCP
+            </summary>
+        </member>
+        <member name="E:Lego.Ev3.Desktop.NetworkCommunication.ReportReceived">
+            <summary>
+            Event fired when a complete report is received from the EV3 brick.
             </summary>
         </member>
         <member name="M:Lego.Ev3.Desktop.NetworkCommunication.#ctor(System.String)">
@@ -1869,11 +1901,6 @@
             </summary>
             <param name="data">Byte array to write to the EV3 brick.</param>
             <returns></returns>
-        </member>
-        <member name="E:Lego.Ev3.Desktop.NetworkCommunication.ReportReceived">
-            <summary>
-            Event fired when a complete report is received from the EV3 brick.
-            </summary>
         </member>
     </members>
 </doc>
