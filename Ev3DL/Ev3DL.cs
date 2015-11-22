@@ -28,6 +28,7 @@ namespace Ev3DL
             btnSendFile.Visible = false;
             btnBrowse.Visible = false;
             btnBuild.Visible = false;
+            btnDisconnect.Visible = false;
         }
         private void EnableSend()
         {
@@ -36,6 +37,7 @@ namespace Ev3DL
             btnSendFile.Visible = true;
             btnBrowse.Visible = true;
             btnBuild.Visible = true;
+            btnDisconnect.Visible = true;
         }
         private void DisableBT()
         {
@@ -125,15 +127,24 @@ namespace Ev3DL
                 return;
             }
             string txt = "Connected";//, Name:"; //Name support unwritten at this time. Need to update the Ev3 library to support it.
-            await brick.DirectCommand.PlayToneAsync(2, 523, 100);
-                System.Threading.Thread.Sleep(75);
-            await brick.DirectCommand.PlayToneAsync(2, 659, 100);
-                System.Threading.Thread.Sleep(75);
-            await brick.DirectCommand.PlayToneAsync(2, 784, 100);
-                System.Threading.Thread.Sleep(75);
-            await brick.DirectCommand.PlayToneAsync(2, 1046, 150);
+
+            Tuple<ushort, ushort>[] tones =
+                {
+                new Tuple<ushort, ushort>(523,100),
+                new Tuple<ushort, ushort>(659,100),
+                new Tuple<ushort, ushort>(784,100),
+                new Tuple<ushort, ushort>(1046,150)
+                };
+            PlayTones(tones);
             labelConnectionStatus.Text = txt;
             EnableSend();
+        }
+        void PlayTones(Tuple<ushort,ushort>[] tones)
+        {
+            System.Timers.Timer t = new System.Timers.Timer(100);
+            int i = 0;
+            t.Elapsed += (_s, _e) => { brick.DirectCommand.PlayToneAsync(2, tones[i].Item1, tones[i].Item2);i++; if (i >= tones.Length) t.Enabled = false; };
+            t.Enabled = true;
         }
         string selectedfile;
         private void openFileDialog1_FileOk(object sender , CancelEventArgs e)
@@ -158,16 +169,20 @@ namespace Ev3DL
             try
             {
                 await brick.SystemCommand.CopyFileAsync(tbFile.Text, "../prjs/" + selectedfile);
-                await brick.DirectCommand.PlayToneAsync(2, 440, 100);
-                System.Threading.Thread.Sleep(100);
-                await brick.DirectCommand.PlayToneAsync(2, 880, 100);
+                Tuple<ushort, ushort>[] tones = {
+                    new Tuple<ushort, ushort>(440,100),
+                    new Tuple<ushort, ushort>(880,100),
+                };
+                PlayTones(tones);
                 MessageBox.Show(this, "File Copied!");
             }
             catch (Exception f)
             {
-                await brick.DirectCommand.PlayToneAsync(2, 880, 100);
-                System.Threading.Thread.Sleep(100);
-                await brick.DirectCommand.PlayToneAsync(2, 440, 100);
+                Tuple<ushort, ushort>[] tones = {
+                    new Tuple<ushort, ushort>(880,100),
+                    new Tuple<ushort, ushort>(440,100),
+                };
+                PlayTones(tones);
                 MessageBox.Show(this, f.Message);
                 return;
             }
@@ -178,6 +193,13 @@ namespace Ev3DL
         {
             var bf = new BuildFrm(tbFile.Text);
             bf.ShowDialog(this);
+        }
+
+        private void btnDisconnect_Click(object sender, EventArgs e)
+        {
+            brick.Disconnect();
+            DisableSend();
+            labelConnectionStatus.Text = "Disconnected";
         }
     }
 }

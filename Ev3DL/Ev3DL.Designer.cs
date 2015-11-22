@@ -44,6 +44,7 @@
             this.btnSendFile = new System.Windows.Forms.Button();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.btnBuild = new System.Windows.Forms.Button();
+            this.btnDisconnect = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -143,7 +144,7 @@
             // 
             // tbFile
             // 
-            this.tbFile.Location = new System.Drawing.Point(110, 165);
+            this.tbFile.Location = new System.Drawing.Point(110, 186);
             this.tbFile.Name = "tbFile";
             this.tbFile.Size = new System.Drawing.Size(234, 22);
             this.tbFile.TabIndex = 6;
@@ -151,7 +152,7 @@
             // labelUpload
             // 
             this.labelUpload.AutoSize = true;
-            this.labelUpload.Location = new System.Drawing.Point(15, 145);
+            this.labelUpload.Location = new System.Drawing.Point(15, 166);
             this.labelUpload.Name = "labelUpload";
             this.labelUpload.Size = new System.Drawing.Size(97, 17);
             this.labelUpload.TabIndex = 7;
@@ -159,7 +160,7 @@
             // 
             // btnSendFile
             // 
-            this.btnSendFile.Location = new System.Drawing.Point(18, 194);
+            this.btnSendFile.Location = new System.Drawing.Point(18, 215);
             this.btnSendFile.Name = "btnSendFile";
             this.btnSendFile.Size = new System.Drawing.Size(75, 23);
             this.btnSendFile.TabIndex = 8;
@@ -169,7 +170,7 @@
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(18, 165);
+            this.btnBrowse.Location = new System.Drawing.Point(18, 186);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(75, 23);
             this.btnBrowse.TabIndex = 9;
@@ -179,7 +180,7 @@
             // 
             // btnBuild
             // 
-            this.btnBuild.Location = new System.Drawing.Point(234, 194);
+            this.btnBuild.Location = new System.Drawing.Point(234, 215);
             this.btnBuild.Name = "btnBuild";
             this.btnBuild.Size = new System.Drawing.Size(109, 23);
             this.btnBuild.TabIndex = 10;
@@ -187,11 +188,22 @@
             this.btnBuild.UseVisualStyleBackColor = true;
             this.btnBuild.Click += new System.EventHandler(this.btnBuild_Click);
             // 
+            // btnDisconnect
+            // 
+            this.btnDisconnect.Location = new System.Drawing.Point(15, 136);
+            this.btnDisconnect.Name = "btnDisconnect";
+            this.btnDisconnect.Size = new System.Drawing.Size(89, 23);
+            this.btnDisconnect.TabIndex = 11;
+            this.btnDisconnect.Text = "Disconnect";
+            this.btnDisconnect.UseVisualStyleBackColor = true;
+            this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
+            // 
             // Ev3DL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(364, 255);
+            this.Controls.Add(this.btnDisconnect);
             this.Controls.Add(this.btnBuild);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.btnSendFile);
@@ -230,6 +242,7 @@
         private System.Windows.Forms.Button btnSendFile;
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.Button btnBuild;
+        private System.Windows.Forms.Button btnDisconnect;
     }
 }
 
