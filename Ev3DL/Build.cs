@@ -29,7 +29,13 @@ namespace Ev3DL
         }
 
         //TODO: Make this less stupid.
-        private const string includes = "\"C:\\Program Files (x86)\\Ev3DL\\lmsapi\\ev3_button.c\" \"C:\\Program Files (x86)\\Ev3DL\\lmsapi\\ev3_command.c\" \"C:\\Program Files (x86)\\Ev3DL\\lmsapi\\ev3_lcd.c\" \"C:\\Program Files (x86)\\Ev3DL\\lmsapi\\ev3_output.c\" \"C:\\Program Files (x86)\\Ev3DL\\lmsapi\\ev3_sound.c\" \"C:\\Program Files (x86)\\Ev3DL\\lmsapi\\ev3_timer.c\" ";
+        private const string includes = "\"C:\\Program Files (x86)\\Ev3DL\\lmsapi\\ev3_button.c\" " +
+            "\"C:\\Program Files (x86)\\Ev3DL\\lmsapi\\ev3_command.c\" " +
+            "\"C:\\Program Files (x86)\\Ev3DL\\lmsapi\\ev3_lcd.c\" " +
+            "\"C:\\Program Files (x86)\\Ev3DL\\lmsapi\\ev3_output.c\" " +
+            "\"C:\\Program Files (x86)\\Ev3DL\\lmsapi\\ev3_sound.c\" " +
+            "\"C:\\Program Files (x86)\\Ev3DL\\lmsapi\\ev3_timer.c\" "+
+			"\"C:\\Program Files (x86)\\Ev3DL\\lmsapi\\serial_read.c\" ";
         private void btnBuild_Click(object sender, EventArgs e)
         {
             var substrstart= tbFile.Text.LastIndexOf("\\")+1;
