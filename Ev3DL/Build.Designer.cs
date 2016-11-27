@@ -35,6 +35,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnBuild = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.SuspendLayout();
             // 
             // tbBuildOutput
@@ -138,5 +139,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnBuild;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }

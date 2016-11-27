@@ -41,9 +41,14 @@ namespace Ev3DL
             var substrstart= tbFile.Text.LastIndexOf("\\")+1;
             var oname = tbFile.Text.Substring(substrstart,tbFile.Text.LastIndexOf(".")-substrstart); 
             System.Diagnostics.Process BuildProcess = new System.Diagnostics.Process();
-            BuildProcess.StartInfo.FileName = @"C:\CSLITE\bin\arm-none-linux-gnueabi-gcc.exe";
             string docpath = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +"\\";
-            BuildProcess.StartInfo.Arguments = "-I \"C:\\Program Files (x86)\\Ev3DL\\lmsapi\" -static -o "+docpath+oname+".out "+ includes + tbFile.Text;
+            DialogResult r = folderBrowserDialog1.ShowDialog(this);
+            if (r == DialogResult.OK)
+                docpath = folderBrowserDialog1.SelectedPath+"\\";
+            oname = docpath + oname;
+            BuildProcess.StartInfo.FileName = @"C:\CSLITE\bin\arm-none-linux-gnueabi-gcc.exe";
+            string args = string.Format("-I \"C:\\Program Files (x86)\\Ev3DL\\lmsapi\" -static -o \"{0}\" {1} \"{2}\"",oname,includes,tbFile.Text);
+            BuildProcess.StartInfo.Arguments = args;
             BuildProcess.StartInfo.CreateNoWindow = true;
             BuildProcess.StartInfo.UseShellExecute = false;
             BuildProcess.StartInfo.RedirectStandardOutput = true;
