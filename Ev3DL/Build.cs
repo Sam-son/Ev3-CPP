@@ -45,7 +45,7 @@ namespace Ev3DL
             DialogResult r = folderBrowserDialog1.ShowDialog(this);
             if (r == DialogResult.OK)
                 docpath = folderBrowserDialog1.SelectedPath+"\\";
-            oname = docpath + oname;
+            oname = docpath + oname + ".out";
             BuildProcess.StartInfo.FileName = @"C:\CSLITE\bin\arm-none-linux-gnueabi-gcc.exe";
             string args = string.Format("-I \"C:\\Program Files (x86)\\Ev3DL\\lmsapi\" -static -o \"{0}\" {1} \"{2}\"",oname,includes,tbFile.Text);
             BuildProcess.StartInfo.Arguments = args;
