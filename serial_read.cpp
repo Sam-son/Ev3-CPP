@@ -36,6 +36,11 @@ int ReadSerial(char port)
  return rtn;
 }
 
+int ReadLight(char port)
+{
+	return ReadSerial(port) & 0xFF; //Light sensor doesn't use MSB from Serial.
+}
+
 void SerialExit()
 {
  munmap(pUart,sizeof(UART));                                  //Finished with the serial ports so we close them up

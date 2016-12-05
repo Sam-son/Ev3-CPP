@@ -7,6 +7,7 @@
 #include "defines.h"
 
 int ReadSerial(char port);
+int ReadLight(char port);
 /*Close the Serial device*/
 void SerialExit();
 
